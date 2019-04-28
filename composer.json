@@ -1,0 +1,39 @@
+{
+    "name": "robertfausk/behat-panther-extension",
+    "type": "behat-extension",
+    "description": "Symfony Panther extension for Behat",
+    "keywords": [
+        "behat",
+        "symfony",
+        "panther",
+        "web",
+        "test",
+        "browser",
+        "gui"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Robert Freigang",
+            "email": "robertfreigang@gmx.de"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "behat/behat": "^3.0.5",
+        "behat/mink-extension": "^2.0",
+        "symfony/config": "^3.4|^4.0"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-0": {
+            "Robertfausk\\BehatPantherExtension": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

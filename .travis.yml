@@ -1,0 +1,31 @@
+language: php
+
+addons:
+    chrome: stable
+
+sudo: false
+
+php: [7.1, 7.2, 7.3]
+
+matrix:
+    allow_failures:
+        -   env: DEPENDENCIES='dev'
+        -   php: 7.3
+    fast_finish: true
+    include:
+        # Test against dev versions of dependencies
+        -   php: 7.3
+            env: DEPENDENCIES='dev'
+cache:
+    directories:
+        - $HOME/.composer/cache/files
+
+before_install:
+    - if [ "$DEPENDENCIES" = "dev" ]; then composer config minimum-stability dev; fi;
+
+install:
+    - composer install --no-progress
+
+script:
+    - vendor/bin/phpspec run -f pretty
+    - vendor/bin/behat -fprogress --strict
