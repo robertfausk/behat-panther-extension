@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Robertfausk\Behat\PantherExtension\ServiceContainer;
 
-use Behat\Mink\Driver\Extension\Driver\PantherFactory;
 use Behat\MinkExtension\ServiceContainer\MinkExtension;
 use Behat\Testwork\ServiceContainer\Extension as ExtensionInterface;
 use Behat\Testwork\ServiceContainer\ExtensionManager;
+use Robertfausk\Behat\PantherExtension\ServiceContainer\Driver\PantherFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
