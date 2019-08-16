@@ -22,7 +22,7 @@
         "php": ">=7.1",
         "behat/behat": "^3.0.5",
         "behat/mink-extension": "^2.0",
-        "robertfausk/mink-panther-driver": "^1.0@dev",
+        "robertfausk/mink-panther-driver": "^1.0",
         "symfony/config": "^3.4|^4.0"
     },
     "require-dev": {
