@@ -39,7 +39,7 @@ class PantherFactory implements DriverFactory
                     ->useAttributeAsKey('key')
                     ->prototype('variable')->end()
                     ->info(
-                        "These are the options passed as first argument to PantherTestcaseTrait::createPantherClient client constructor."
+                        "These are the options passed as first argument to PantherTestCaseTrait::createPantherClient client constructor."
                     )
                 ->end()
             ->end()
