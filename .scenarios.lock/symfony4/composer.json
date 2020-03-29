@@ -31,8 +31,8 @@
         "g1a/composer-test-scenarios": "^3.0"
     },
     "autoload": {
-        "psr-0": {
-            "Robertfausk\\Behat\\PantherExtension": "src/"
+        "psr-4": {
+            "Robertfausk\\Behat\\PantherExtension": "../../src/"
         }
     },
     "autoload-dev": {
