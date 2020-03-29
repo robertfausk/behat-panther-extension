@@ -28,7 +28,7 @@ install:
 
 script:
     - vendor/bin/phpunit -v --coverage-clover=coverage.clover
-    - vendor/bin/behat
+    - vendor/bin/behat --config=tests/Behat/behat.yml
 
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
