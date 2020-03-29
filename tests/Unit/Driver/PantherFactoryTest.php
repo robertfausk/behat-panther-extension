@@ -70,6 +70,6 @@ class PantherFactoryTest extends TestCase
         $arguments = $definition->getArguments();
 
         $this->assertArrayHasKey(0, $arguments, 'Arguments of definition should not be empty.');
-        $this->assertSame(null, $arguments[0]);
+        $this->assertSame([], $arguments[0]);
     }
 }
