@@ -33,7 +33,13 @@ class PantherConfiguration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('options');
 
-        $node = $treeBuilder->getRootNode()
+        if (\method_exists($treeBuilder, 'getRootNode')) {
+            $root = $treeBuilder->getRootNode();
+        } else {
+            $root = $treeBuilder->root('options');
+        }
+
+        $node = $root
             ->info(
                 "These are the options passed as first argument to PantherTestCaseTrait::createPantherClient client constructor."
             )
