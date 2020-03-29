@@ -23,8 +23,53 @@ Symfony Panther extension for Behat
 composer require --dev robertfausk/behat-panther-extension
 ```
 
+## Usage example
+
+* Add ```Robertfausk\Behat\PantherExtension: ~``` to your behat.yml.
+* Use ```panther``` session in ```Behat\MinkExtension```. 
+* The extension will use options of ```symfony/panther``` by default.
+Have a look at ```PantherTestCaseTrait::$defaultOptions``` for this.
+* Following are some examples with all sessions using mink-panther-driver:
+    ```YAML
+    # in behat.yml
+        extensions:
+            Robertfausk\Behat\PantherExtension: ~ # no configuration here
+            Behat\MinkExtension:
+               javascript_session: javascript_chrome
+               sessions:
+                   default:
+                       panther: ~
+                   javascript:
+                       panther:
+                           options: ~
+                   javascript_chrome:
+                       panther:
+                           options:
+                               browser: 'chrome'
+                               webServerDir: '%paths.base%/public' # your custom public dir
+                   javascript_firefox:
+                       panther:
+                           options:
+                               browser: 'firefox'
+    ```
+
+### How to upgrade?
+
+ Have a look at [CHANGELOG](CHANGELOG.md) for detailed information.
+
+## How to contribute?
+
+Start docker-compose with php version of your choice. Currently there are php7.2, php7.3 and php7.4.
+
+    docker-compose up php7.2
+
+Run phpunit tests
+
+    docker-compose run php7.2 vendor/bin/phpunit
+
 ## Credits
 
 Created by Robert Freigang [robertfausk](https://github.com/robertfausk).
 
-MinkPantherDriver is built on top of [Panther](https://github.com/symfony/panther) and for usage with [Behat and Mink](http://behat.org/en/latest/cookbooks/integrating_symfony2_with_behat.html#initialising-behat). 
+BehatPantherExtension is built on top of [symfony/panther](https://github.com/symfony/panther) and [robertfausk/mink-panther-driver]([Panther](https://github.com/robertfausk/mink-panther-driver)).
+It is for usage with [Behat and Mink](http://behat.org/en/latest/cookbooks/integrating_symfony2_with_behat.html#initialising-behat). 

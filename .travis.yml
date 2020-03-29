@@ -5,16 +5,16 @@ addons:
 
 sudo: false
 
-php: [7.1, 7.2, 7.3]
+php: [7.1, 7.2, 7.3, 7.4]
 
 matrix:
     allow_failures:
         -   env: DEPENDENCIES='dev'
-        -   php: 7.3
+        -   php: 7.4
     fast_finish: true
     include:
         # Test against dev versions of dependencies
-        -   php: 7.3
+        -   php: 7.4
             env: DEPENDENCIES='dev'
 cache:
     directories:
@@ -27,5 +27,9 @@ install:
     - composer install --no-progress
 
 script:
-    - vendor/bin/phpspec run -f pretty
-    - vendor/bin/behat -fprogress --strict
+    - vendor/bin/phpunit -v --coverage-clover=coverage.clover
+    - vendor/bin/behat
+
+after_script:
+    - wget https://scrutinizer-ci.com/ocular.phar
+    - php ocular.phar code-coverage:upload --format=php-clover coverage.clover

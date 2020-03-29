@@ -1,0 +1,29 @@
+default:
+    suites:
+        web:
+            paths:
+                - '%paths.base%/features'
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+    extensions:
+        Robertfausk\Behat\PantherExtension: ~ # no configuration here
+        Behat\MinkExtension:
+            browser_name:       chrome
+            javascript_session: javascript_chrome
+            sessions:
+                default:
+                    panther:
+                        options:
+                            webServerDir: '%paths.base%/public'
+                javascript:
+                    panther:
+                        options: ~
+                javascript_chrome:
+                    panther:
+                        options:
+                            browser: 'chrome'
+                            webServerDir: '%paths.base%/public'
+                javascript_firefox:
+                    panther:
+                        options:
+                            browser: 'firefox'

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Robertfausk\Behat\PantherExtension\ServiceContainer\Driver;
 
 use Behat\MinkExtension\ServiceContainer\Driver\DriverFactory;
+use Robertfausk\Behat\PantherExtension\ServiceContainer\PantherConfiguration;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -33,17 +34,8 @@ class PantherFactory implements DriverFactory
      */
     public function configure(ArrayNodeDefinition $builder)
     {
-        $builder
-            ->children()
-                ->arrayNode('options')
-                    ->useAttributeAsKey('key')
-                    ->prototype('variable')->end()
-                    ->info(
-                        "These are the options passed as first argument to PantherTestCaseTrait::createPantherClient client constructor."
-                    )
-                ->end()
-            ->end()
-        ;
+        $configuration = new PantherConfiguration();
+        $builder->append($configuration->addOptionsNode());
     }
 
     /**
