@@ -8,7 +8,6 @@ sudo: false
 php: [7.1, 7.2, 7.3, 7.4]
 
 matrix:
-    fast_finish: true
     include:
         -   php: 7.4
             env: 'SCENARIO=symfony4 DEPENDENCIES=highest'
@@ -42,6 +41,6 @@ script:
     - vendor/bin/behat --config=tests/Behat/behat.yml
 
 after_script:
-    - travis_retry php vendor/bin/coveralls -v
     - wget https://scrutinizer-ci.com/ocular.phar
     - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+    - 'travis_retry php vendor/bin/coveralls -v'
