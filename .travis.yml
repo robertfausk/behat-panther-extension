@@ -5,8 +5,6 @@ addons:
 
 sudo: false
 
-php: [7.2, 7.3, 7.4]
-
 matrix:
     include:
         -   php: 7.4
@@ -20,9 +18,8 @@ matrix:
         -   php: 7.2
             env: 'SCENARIO=symfony3'
         -   php: 7.1
-            env: 'SCENARIO=symfony3'
-        -   php: 7.1
-            env: 'SCENARIO=symfony3 DEPENDENCIES=lowest'
+            env: 'SCENARIO=symfony3 DEPENDENCIES=highest'
+
 cache:
     directories:
         - $HOME/.composer/cache/files
