@@ -25,7 +25,7 @@
         }
     ],
     "require": {
-        "symfony/config": "^3.4",
+        "symfony/config": "^5.0",
         "php": ">=7.1",
         "behat/behat": "^3.0.5",
         "behat/mink-extension": "dev-upgrade/allow-symony-5 as 2.3",

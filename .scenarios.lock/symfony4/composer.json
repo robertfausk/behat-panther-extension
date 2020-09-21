@@ -18,11 +18,17 @@
             "email": "robertfreigang@gmx.de"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/chadyred/MinkExtension"
+        }
+    ],
     "require": {
         "symfony/config": "^4.0",
         "php": ">=7.1",
         "behat/behat": "^3.0.5",
-        "behat/mink-extension": "^2.0",
+        "behat/mink-extension": "dev-upgrade/allow-symony-5 as 2.3",
         "robertfausk/mink-panther-driver": "^1.0"
     },
     "require-dev": {
