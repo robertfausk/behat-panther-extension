@@ -29,6 +29,7 @@ cache:
 
 install:
     - '.scenarios.lock/install "${SCENARIO}" "${DEPENDENCIES}"'
+    - bin/updatePantherChromeDriver.sh
 
 script:
     - vendor/bin/phpunit -v --coverage-clover=coverage.clover
