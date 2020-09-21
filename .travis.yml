@@ -8,6 +8,8 @@ sudo: false
 matrix:
     include:
         -   php: 7.4
+            env: 'SCENARIO=symfony5'
+        -   php: 7.4
             env: 'symfony3 DEPENDENCIES=lowest'
         -   php: 7.4
             env: 'symfony3 DEPENDENCIES=highest'
