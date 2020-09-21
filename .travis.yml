@@ -27,9 +27,6 @@ cache:
     directories:
         - $HOME/.composer/cache/files
 
-before_install:
-    - git config --global github.accesstoken $GH_TOKEN
-
 install:
     - '.scenarios.lock/install "${SCENARIO}" "${DEPENDENCIES}"'
     - bin/updatePantherChromeDriver.sh
