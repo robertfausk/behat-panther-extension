@@ -5,17 +5,22 @@
 cd vendor/symfony/panther/chromedriver-bin
 
 chromiumVersion=$(chromium --product-version 2>&1;);
+chromiumBrowserVersion=$(chromium-browser --product-version 2>&1;);
 googleChromeVersion=$(google-chrome --product-version 2>&1;);
 if [[ ${chromiumVersion} == *"."*"."* ]]; then
   chromiumVersion="$( cut -d '.' -f 1 <<< "$chromiumVersion" )";
-  echo "Found chromiumVersion ${chromiumVersion}";
+  echo "Found chromium version ${chromiumVersion}";
   chromeDriverVersion="_${chromiumVersion}"
+elif [[ ${chromiumBrowserVersion} == *"."*"."* ]]; then
+  chromiumBrowserVersion="$( cut -d '.' -f 1 <<< "$chromiumBrowserVersion" )";
+  echo "Found chromium-browser version ${chromiumBrowserVersion}";
+  chromeDriverVersion="_${chromiumBrowserVersion}"
 elif [[ ${googleChromeVersion} == *"."*"."* ]]; then
   googleChromeVersion="$( cut -d '.' -f 1 <<< "$googleChromeVersion" )";
-  echo "Found googleChromeVersion ${googleChromeVersion}";
+  echo "Found google-chrome version ${googleChromeVersion}";
   chromeDriverVersion="_${googleChromeVersion}"
 else
-  "No google-chrome or chromium found. Using latest release..."
+  "No google-chrome, chromium-browser or chromium found. Using latest release..."
   chromeDriverVersion=""
 fi
 
@@ -35,4 +40,3 @@ done
 
 curl -s https://chromedriver.storage.googleapis.com/${chromeDriver}/notes.txt -O
 echo "Done."
-
