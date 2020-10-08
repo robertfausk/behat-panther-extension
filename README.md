@@ -69,5 +69,5 @@ Run phpunit tests
 
 Created by Robert Freigang [robertfausk](https://github.com/robertfausk).
 
-BehatPantherExtension is built on top of [symfony/panther](https://github.com/symfony/panther) and [robertfausk/mink-panther-driver]([Panther](https://github.com/robertfausk/mink-panther-driver)).
+BehatPantherExtension is built on top of [symfony/panther](https://github.com/symfony/panther) and [robertfausk/mink-panther-driver](https://github.com/robertfausk/mink-panther-driver).
 It is for usage with [Behat and Mink](http://behat.org/en/latest/cookbooks/integrating_symfony2_with_behat.html#initialising-behat). 
