@@ -36,3 +36,12 @@ services:
         - PHP_VERSION=7.4
     volumes:
       - .:/var/www/html
+
+  php8.0:
+    tty: true
+    build:
+      context: .
+      args:
+        - PHP_VERSION=8.0
+    volumes:
+      - .:/var/www/html

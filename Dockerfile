@@ -16,7 +16,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /home/docker/.composer
 # contains dev-mode packages
-RUN composer global require "hirak/prestissimo:^0.3" "sllh/composer-versions-check:^2.0" "pyrech/composer-changelogs:^1.7" --prefer-dist --no-progress --no-suggest --classmap-authoritative
+RUN composer global require "pyrech/composer-changelogs:^1.7" --prefer-dist --no-progress --no-suggest --classmap-authoritative
 
 ##############################################################
 # add symfony/panther
@@ -32,8 +32,13 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     libpng-dev
 
-RUN docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ && \
-    docker-php-ext-install gd
+RUN if [[ "${PHP_VERSION}" = "7.4*" ]] || [[ "${PHP_VERSION}" = "8.0*" ]]; then \
+    docker-php-ext-configure gd --with-jpeg=/usr/include/ && \
+    docker-php-ext-install gd \
+    ;el \
+    docker-php-ext-configure gd --with-jpeg=/usr/include/ && \
+    docker-php-ext-install gd \
+    ;fi
 
 WORKDIR /var/www/html
 COPY . /var/www/html
