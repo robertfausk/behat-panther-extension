@@ -1,5 +1,38 @@
-1.0.1 / 2020-03-29
-==================
+v1.0.4 / 2021-02-23
+===================
+
+Features:
+* Add support for ```PHP 8.0```
+
+Misc:
+* Support and use composer 2 in Dockerfile
+* Add support for local development with ```PHP 7.1```, ```PHP 7.2```, ```PHP 7.3```, ```PHP 7.4``` and ```PHP 8.0``` via ```docker-compose.yml```
+
+v1.0.3 / 2020-09-21
+===================
+
+Features:
+* switch to ```friends-of-behat/mink-extension``` from ```behat/mink-extension```
+  cause it is recommended to switch at the moment and there is no real support for ```behat/mink-extension``` with symfony 5.x
+  If you want to stay with ```behat/mink-extension``` then you have to pin ```v1.0.2```.
+
+v1.0.2 / 2020-09-21
+===================
+
+Features:
+* Add support for symfony 5 using ```behat/mink-extension```
+  But as a drawback you need to add following in your ```composer.json```:
+```JSON
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/chadyred/MinkExtension"
+        }
+    ],
+```
+
+v1.0.1 / 2020-03-29
+===================
 
 Features: 
 * Enabled configuration per driver instance; usage examples with all sessions using mink-panther-driver:
@@ -33,7 +66,7 @@ Testsuite:
 * Added Unit Tests
 * Added one simple scenario test with behat
 
-1.0.0 / 2019-08-16
-==================
+v1.0.0 / 2019-08-16
+===================
 
 Initial Release :tada: 
