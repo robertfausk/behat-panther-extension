@@ -24,7 +24,11 @@ class PantherConfiguration implements ConfigurationInterface
             $root = $treeBuilder->root('panther');
         }
 
-        $root->append($this->addOptionsNode());
+        $root->children()
+            ->append($this->addOptionsNode())
+            ->append($this->addKernelOptionsNode())
+            ->append($this->addManagerOptionsNode())
+        ->end();
 
         return $treeBuilder;
     }
@@ -42,6 +46,50 @@ class PantherConfiguration implements ConfigurationInterface
         $node = $root
             ->info(
                 "These are the options passed as first argument to PantherTestCaseTrait::createPantherClient client constructor."
+            )
+            ->ignoreExtraKeys()
+            ->scalarPrototype()
+            ->end()
+        ;
+
+        return $node;
+    }
+
+    public function addKernelOptionsNode(): ArrayNodeDefinition
+    {
+        $treeBuilder = new TreeBuilder('kernel_options');
+
+        if (\method_exists($treeBuilder, 'getRootNode')) {
+            $root = $treeBuilder->getRootNode();
+        } else {
+            $root = $treeBuilder->root('kernel_options');
+        }
+
+        $node = $root
+            ->info(
+                "These are the options passed as second argument to PantherTestCaseTrait::createPantherClient client constructor."
+            )
+            ->ignoreExtraKeys()
+            ->scalarPrototype()
+            ->end()
+        ;
+
+        return $node;
+    }
+
+    public function addManagerOptionsNode(): ArrayNodeDefinition
+    {
+        $treeBuilder = new TreeBuilder('manager_options');
+
+        if (\method_exists($treeBuilder, 'getRootNode')) {
+            $root = $treeBuilder->getRootNode();
+        } else {
+            $root = $treeBuilder->root('manager_options');
+        }
+
+        $node = $root
+            ->info(
+                "These are the options passed as third argument to PantherTestCaseTrait::createPantherClient client constructor."
             )
             ->ignoreExtraKeys()
             ->scalarPrototype()
