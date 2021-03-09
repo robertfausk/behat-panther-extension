@@ -18,10 +18,16 @@
             "email": "robertfreigang@gmx.de"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/phcorp/mink-panther-driver"
+        }
+    ],
     "require": {
         "php": ">=7.1",
         "behat/behat": "^3.0.5",
-        "robertfausk/mink-panther-driver": "^1.0",
+        "robertfausk/mink-panther-driver": "dev-feat/all-panther-options",
         "symfony/config": "^3.4|^4.0|^5.0",
         "friends-of-behat/mink-extension": "^2.3.0"
     },
