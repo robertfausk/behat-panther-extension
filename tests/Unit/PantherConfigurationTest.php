@@ -68,6 +68,8 @@ class PantherConfigurationTest extends TestCase
                 'options' => [
                     'hostname' => '127.0.0.1',
                 ],
+                'kernel_options' => [],
+                'manager_options' => [],
             ]
         );
     }

@@ -36,6 +36,8 @@ class PantherFactory implements DriverFactory
     {
         $configuration = new PantherConfiguration();
         $builder->append($configuration->addOptionsNode());
+        $builder->append($configuration->addKernelOptionsNode());
+        $builder->append($configuration->addManagerOptionsNode());
     }
 
     /**
@@ -53,6 +55,8 @@ class PantherFactory implements DriverFactory
             'Behat\Mink\Driver\PantherDriver',
             array(
                 $config['options'] ?? [],
+                $config['kernel_options'] ?? [],
+                $config['manager_options'] ?? [],
             )
         );
     }
