@@ -1,3 +1,9 @@
+v1.0.5 / 2021-03-14
+===================
+
+Features:
+* Allow to pass kernel options and manager options to panther driver (#5 and #6; Thx to @phcorp)
+
 v1.0.4 / 2021-02-23
 ===================
 

@@ -50,6 +50,15 @@ Have a look at ```PantherTestCaseTrait::$defaultOptions``` for this.
                        panther:
                            options:
                                browser: 'firefox'
+                   javascript_with_all_options:
+                       panther:
+                           options: ~
+                           kernel_options:
+                               APP_ENV: dev
+                               APP_DEBUG: true
+                           manager_options:
+                               connection_timeout_in_ms: 5000
+                               request_timeout_in_ms: 120000
     ```
 
 ### How to upgrade?
@@ -58,7 +67,7 @@ Have a look at ```PantherTestCaseTrait::$defaultOptions``` for this.
 
 ## How to contribute?
 
-Start docker-compose with php version of your choice. Currently there are php7.2, php7.3 and php7.4.
+Start docker-compose with php version of your choice. At the moment the following php versions can be used with docker-compose: php7.1, php7.2, php7.3, php7.4 and php8.0.
 
     docker-compose up php7.2
 
