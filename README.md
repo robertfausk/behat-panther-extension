@@ -64,7 +64,7 @@ Have a look at ```PantherTestCaseTrait::$defaultOptions``` for this.
 #### Example on how to test for a downloaded file
 
 ```YAML
-# in behat.yml ensure that chrome saves a files to the destination you want
+# in behat.yml ensure that chrome saves files to the destination you want
     extensions:
         Robertfausk\Behat\PantherExtension: ~
         Behat\MinkExtension:
