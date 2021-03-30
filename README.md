@@ -61,6 +61,115 @@ Have a look at ```PantherTestCaseTrait::$defaultOptions``` for this.
                                request_timeout_in_ms: 120000
     ```
 
+#### Example on how to test for a downloaded file
+
+```YAML
+# in behat.yml ensure that chrome saves a files to the destination you want
+    extensions:
+        Robertfausk\Behat\PantherExtension: ~
+        Behat\MinkExtension:
+           javascript_session: javascript
+           files_path: '%paths.base%/tests/files'
+           sessions:
+               javascript:
+                   panther:
+                       manager_options:
+                       capabilities:
+                            goog:chromeOptions:
+                                prefs:
+                                    download.default_directory: '/var/www/html/tests/files/Downloads'
+```
+
+```GHERKIN
+# acme_download.feature
+Feature: Acme files can be downloaded
+
+  Background:
+    Given there is no file in download directory
+    # additionally setup your database entries etc. if needed
+
+  @javascript
+  Scenario: As an user with role Admin i can download an existing acme file
+    Given I am authenticated as "admin@acme.de"
+    And I am on "/acme-file-list"
+    Then I wait for "acme.pdf" to appear
+    When I click on test button "button-acme-download"
+    Then I can find file "acme.pdf" in download directory
+```
+
+```PHP
+<?php
+#AcmeContext.php
+
+use Assert\Assertion;
+use Behat\Mink\Element\NodeElement;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
+
+
+/**
+ * @When /^I click on test element "([^"]*)"$/
+ *
+ * @param string $locator
+ */
+public function iClickOnTestElement(string $locator): void
+{
+    $btn = $this->getTestElement($locator);
+    $btn->click();
+}
+
+/**
+ * @Given /^there is no file in download directory$/
+ */
+public function thereIsNoFileinDownloadDirectory(): void
+{
+    $finder = new Finder();
+    $fs = new Filesystem();
+    $fs->remove($finder->in($this->getDownloadDirectory())->files());
+}
+
+/**
+ * @Then /^I can find file "([^"]*)" in download directory$/
+ */
+public function iCanFindFileInDownloadDirectory($filename)
+{
+    $fs = new Filesystem();
+    $path = \sprintf('%s%s%s', $this->getDownloadDirectory(), DIRECTORY_SEPARATOR, $filename);
+    $this->spin(
+        static function () use ($fs, $path): void {
+            $isFileExisting = $fs->exists($path);
+            Assertion::true($isFileExisting);
+        },
+    );
+    Assertion::true($fs->exists($path));
+}
+
+private function getDownloadDirectory(): string
+{
+    return \sprintf('%s%sDownloads', $this->getMinkParameter('files_path'), DIRECTORY_SEPARATOR);
+}
+
+private function getTestElement(string $dataTestLocator, int $tries = 25): NodeElement
+{
+    return $this->getNodeElement("[data-test='$dataTestLocator']", $tries);
+}
+
+private function spin(\Closure $closure, ?int $tries = 25): ?NodeElement
+{
+    for ($i = 0; $i <= $tries; $i++) {
+        try {
+            return $closure();
+        } catch (\Throwable $e) {
+            if ($i === $tries) {
+                throw $e;
+            }
+        }
+
+        \usleep(100000); // 100 milliseconds
+    }
+}
+```
+                               
 ### How to upgrade?
 
  Have a look at [CHANGELOG](CHANGELOG.md) for detailed information.
