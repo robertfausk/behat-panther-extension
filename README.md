@@ -93,7 +93,7 @@ Feature: Acme files can be downloaded
     Given I am authenticated as "admin@acme.de"
     And I am on "/acme-file-list"
     Then I wait for "acme.pdf" to appear
-    When I click on test button "button-acme-download"
+    When I click on test element "button-acme-download"
     Then I can find file "acme.pdf" in download directory
 ```
 
