@@ -1,3 +1,10 @@
+v1.0.6 / 2021-03-30
+===================
+
+Features:
+* Allow to pass a variable/array to manager options and not just scalar values
+* Provide example in Readme on how to test if a file was downloaded 
+
 v1.0.5 / 2021-03-14
 ===================
 
