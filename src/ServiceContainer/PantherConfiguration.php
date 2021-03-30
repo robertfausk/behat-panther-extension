@@ -92,7 +92,7 @@ class PantherConfiguration implements ConfigurationInterface
                 "These are the options passed as third argument to PantherTestCaseTrait::createPantherClient client constructor."
             )
             ->ignoreExtraKeys()
-            ->scalarPrototype()
+            ->variablePrototype()
             ->end()
         ;
 

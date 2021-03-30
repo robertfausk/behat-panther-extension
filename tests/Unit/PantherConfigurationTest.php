@@ -74,6 +74,41 @@ class PantherConfigurationTest extends TestCase
         );
     }
 
+    public function test_processed_configuration_for_manager_options(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                [
+                    'manager_options' => [
+                        'connection_timeout_in_ms' => '5000',
+                        'request_timeout_in_ms' => '120000',
+                        'capabilities' => [
+                                'goog:chromeOptions' => [
+                                    'prefs' => [
+                                        'download.default_directory' => '/var/www/html/tests/files/Downloads',
+                                    ],
+                                ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'manager_options' => [
+                    'connection_timeout_in_ms' => '5000',
+                    'request_timeout_in_ms' => '120000',
+                    'capabilities' => [
+                        'goog:chromeOptions' => [
+                            'prefs' => [
+                                'download.default_directory' => '/var/www/html/tests/files/Downloads',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'manager_options'
+        );
+    }
+
     protected function getConfiguration(): PantherConfiguration
     {
         return new PantherConfiguration();
