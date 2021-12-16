@@ -74,10 +74,10 @@ Have a look at ```PantherTestCaseTrait::$defaultOptions``` for this.
                javascript:
                    panther:
                        manager_options:
-                       capabilities:
-                            goog:chromeOptions:
-                                prefs:
-                                    download.default_directory: '/var/www/html/tests/files/Downloads'
+                           capabilities:
+                                goog:chromeOptions:
+                                    prefs:
+                                        download.default_directory: '/var/www/html/tests/files/Downloads'
 ```
 
 ```GHERKIN
