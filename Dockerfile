@@ -1,6 +1,6 @@
 ARG PHP_VERSION=7.2
 
-FROM composer:latest as composer
+FROM composer:2 as composer
 FROM php:${PHP_VERSION}-cli
 
 # replace shell with bash so we can source files
@@ -39,6 +39,8 @@ RUN if [[ "${PHP_VERSION}" = "7.4*" ]] || [[ "${PHP_VERSION}" = "8.0*" ]]; then 
     docker-php-ext-configure gd --with-jpeg=/usr/include/ && \
     docker-php-ext-install gd \
     ;fi
+
+RUN composer self-update
 
 WORKDIR /var/www/html
 COPY . /var/www/html

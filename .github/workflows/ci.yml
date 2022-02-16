@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        php: [ '7.1', '7.2', '7.3', '7.4', '8.0', '8.1' ]
+        php: [ '7.2', '7.3', '7.4', '8.0', '8.1' ]
         symfony: ['symfony3', 'symfony4', 'symfony5']
         include:
           - php: '8.0'
@@ -38,26 +38,12 @@ jobs:
           coverage: "none"
           php-version: "${{ matrix.php }}"
           tools: composer
-          # PHP 7.1 development web server segfaults if timezone not set.
-          ini-values: date.timezone=Europe/Berlin, error_reporting=-1, display_errors=On
       - name: Install scenario
         run: |
           .scenarios.lock/install "${{ matrix.symfony }}" "${DEPENDENCIES}"
-      - name: Configure for PHP >= 7.2
-        if: "${{ matrix.php >= '7.2' }}"
-        run: |
-          composer require --no-update --dev dbrekelmans/bdi
-      - name: Add browser drivers for PHP >= 7.2
-        if: "${{ matrix.php >= '7.2' }}"
+      - name: Add browser drivers
         run: |
           vendor/bin/bdi detect drivers
-      - name: Add browser drivers for PHP == 7.1
-        if: "${{ matrix.php == '7.1' }}"
-        # additionally, place 'chromedriver' file also in folder 'driver' for symfony/panther >=0.9 and PHP 7.1
-        run: |
-          bin/updatePantherChromeDriver.sh
-          mkdir drivers
-          mv vendor/symfony/panther/chromedriver-bin/chromedriver_linux64 drivers/chromedriver
       - name: Run unit tests
         run: |
           vendor/bin/phpunit -v

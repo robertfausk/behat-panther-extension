@@ -19,17 +19,18 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
+        "php": ">=7.2",
         "behat/behat": "^3.0.5",
         "robertfausk/mink-panther-driver": "^1.0",
         "symfony/config": "^3.4|^4.0|^5.0|^6.0",
         "friends-of-behat/mink-extension": "^2.3.0"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-master",
-        "phpunit/phpunit": "~7.5|~9.3",
+        "dbrekelmans/bdi": "^1.0",
+        "g1a/composer-test-scenarios": "^3.0",
         "matthiasnoback/symfony-config-test": "^4.1",
-        "g1a/composer-test-scenarios": "^3.0"
+        "phpunit/phpunit": "~7.5|~9.3",
+        "roave/security-advisories": "dev-master"
     },
     "autoload": {
         "psr-4": {
@@ -42,7 +43,11 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "g1a/composer-test-scenarios": true,
+            "pyrech/composer-changelogs": true
+        }
     },
     "extra": {
         "branch-alias": {
