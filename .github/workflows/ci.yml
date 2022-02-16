@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        php: [ '7.2', '7.3', '7.4', '8.0', '8.1' ]
+        symfony: ['symfony3', 'symfony4', 'symfony5']
+        include:
+          - php: '8.0'
+            symfony: 'symfony6'
+          - php: '8.1'
+            symfony: 'symfony6'
+      fail-fast: false
+    env:
+      MATRIX_PHP: ${{ matrix.php }}
+      MATRIX_SYMFONY: ${{ matrix.symfony }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          coverage: "none"
+          php-version: "${{ matrix.php }}"
+          tools: composer
+      - name: Install scenario
+        run: |
+          .scenarios.lock/install "${{ matrix.symfony }}" "${DEPENDENCIES}"
+      - name: Add browser drivers
+        run: |
+          vendor/bin/bdi detect drivers
+      - name: Run unit tests
+        run: |
+          vendor/bin/phpunit -v
+      - name: Run behat tests
+        run: |
+          vendor/bin/behat --config=tests/Behat/behat.yml
+      - name: Archive logs artifacts
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: logs_php-${{ matrix.php }}
+          path: |
+            logs

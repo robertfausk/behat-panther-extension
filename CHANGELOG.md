@@ -1,3 +1,14 @@
+v1.0.7 / 2022-02-16
+===================
+
+Features:
+* Add support for ```Symfony 6```
+* Add support for ```PHP 8.1```
+* Drop support for ```PHP 7.1``` cause of too much maintenance afford. Stick with ```v1.0.6``` if you want to use ```PHP 7.1```.
+
+Misc:
+* Use GitHub Actions instead of Travis CI for continuous integration.
+
 v1.0.6 / 2021-03-30
 ===================
 

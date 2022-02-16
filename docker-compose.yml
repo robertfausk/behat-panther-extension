@@ -1,15 +1,6 @@
 version: "3"
 services:
 
-  php7.1:
-    tty: true
-    build:
-      context: .
-      args:
-        - PHP_VERSION=7.1
-    volumes:
-      - .:/var/www/html
-
   php7.2:
     tty: true
     build:
@@ -43,5 +34,14 @@ services:
       context: .
       args:
         - PHP_VERSION=8.0
+    volumes:
+      - .:/var/www/html
+
+  php8.1:
+    tty: true
+    build:
+      context: .
+      args:
+        - PHP_VERSION=8.1
     volumes:
       - .:/var/www/html
