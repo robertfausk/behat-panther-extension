@@ -1,3 +1,10 @@
+vx.x.x / 2022-xx-xx
+===================
+
+Misc:
+
+* Rename branch ```master``` to ```main``` cause black lives matter. #9 #10
+
 v1.1.0 / 2022-02-16
 ===================
 
