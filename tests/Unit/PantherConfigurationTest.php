@@ -62,11 +62,12 @@ class PantherConfigurationTest extends TestCase
     {
         $this->assertProcessedConfigurationEquals(
             [
-                ['options' => ['hostname' => '127.0.0.1']],
+                ['options' => ['hostname' => '127.0.0.1', 'env' => ['APP_ENV' => 'dev']]],
             ],
             [
                 'options' => [
                     'hostname' => '127.0.0.1',
+                    'env' => ['APP_ENV' => 'dev'],
                 ],
                 'kernel_options' => [],
                 'manager_options' => [],

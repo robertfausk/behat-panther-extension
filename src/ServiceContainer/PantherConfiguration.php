@@ -48,7 +48,7 @@ class PantherConfiguration implements ConfigurationInterface
                 "These are the options passed as first argument to PantherTestCaseTrait::createPantherClient client constructor."
             )
             ->ignoreExtraKeys()
-            ->scalarPrototype()
+            ->variablePrototype()
             ->end()
         ;
 
