@@ -54,10 +54,11 @@ Have a look at ```PantherTestCaseTrait::$defaultOptions``` for this.
                                browser: 'firefox'
                    javascript_with_all_options:
                        panther:
-                           options: ~
-                           kernel_options:
-                               APP_ENV: dev
-                               APP_DEBUG: true
+                           options:
+                               env:
+                                   APP_ENV: 'dev'
+                               hostname: '127.0.0.1'    
+                           kernel_options: ~ # unused by behat-panther-extension cause it does not extend KernelTestCase
                            manager_options:
                                connection_timeout_in_ms: 5000
                                request_timeout_in_ms: 120000
