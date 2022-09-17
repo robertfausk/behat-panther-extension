@@ -1,6 +1,9 @@
 vx.x.x / 2022-xx-xx
 ===================
 
+Features:
+* Add support for ```PHP 8.2```
+
 Misc:
 
 * Rename branch ```master``` to ```main``` cause black lives matter. #9 #10

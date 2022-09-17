@@ -4,11 +4,15 @@
     "description": "Symfony Panther extension for Behat",
     "keywords": [
         "behat",
+        "gherkin",
+        "cucumber",
         "symfony",
         "panther",
         "web",
         "test",
         "browser",
+        "chrome",
+        "firefox",
         "gui"
     ],
     "license": "MIT",
@@ -52,7 +56,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "1.1.x-dev"
         }
     }
 }
