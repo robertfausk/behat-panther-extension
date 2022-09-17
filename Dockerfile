@@ -16,6 +16,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /home/docker/.composer
 # contains dev-mode packages
+RUN composer global config --no-plugins allow-plugins.pyrech/composer-changelogs true
 RUN composer global require "pyrech/composer-changelogs:^1.7" --prefer-dist --no-progress --no-suggest --classmap-authoritative
 
 ##############################################################
