@@ -64,6 +64,25 @@ Have a look at ```PantherTestCaseTrait::$defaultOptions``` for this.
                                request_timeout_in_ms: 120000
     ```
 
+#### Example on how to pass arguments to ChromeDriver binary
+
+See also https://chromedriver.chromium.org/logging
+
+```YAML
+# in behat.yml enable logging
+    extensions:
+        Robertfausk\Behat\PantherExtension: ~
+        Behat\MinkExtension:
+           javascript_session: javascript
+           sessions:
+               javascript:
+                   panther:
+                       manager_options:
+                           chromedriver_arguments:
+                               - --log-path=/var/www/html/chromedriver.log
+                               - --verbose
+```
+
 #### Example on how to test for a downloaded file
 
 ```YAML
