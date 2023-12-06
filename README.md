@@ -13,7 +13,7 @@
 [![Open Issues](https://img.shields.io/github/issues-raw/robertfausk/behat-panther-extension?style=flat)](https://github.com/robertfausk/behat-panther-extension/issues)
 [![Closed Issues](https://img.shields.io/github/issues-closed-raw/robertfausk/behat-panther-extension?style=flat)](https://github.com/robertfausk/behat-panther-extension/issues?q=is%3Aissue+is%3Aclosed)
 [![Contributors](https://img.shields.io/github/contributors/robertfausk/behat-panther-extension?style=flat)](https://github.com/robertfausk/behat-panther-extension/graphs/contributors)
-![Contributors](https://img.shields.io/maintenance/yes/2022?style=flat)
+![Contributors](https://img.shields.io/maintenance/yes/2024?style=flat)
 [![Dependents](http://poser.pugx.org/robertfausk/behat-panther-extension/dependents)](https://packagist.org/packages/robertfausk/behat-panther-extension/dependents)
 
 Symfony Panther extension for Behat
