@@ -36,6 +36,8 @@ jobs:
           fetch-depth: 1
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           coverage: "none"
           php-version: "${{ matrix.php }}"
