@@ -23,10 +23,10 @@
         }
     ],
     "require": {
+        "symfony/config": "^7.0",
         "php": ">=7.2",
         "behat/behat": "^3.0.5",
         "robertfausk/mink-panther-driver": "^1.0",
-        "symfony/config": "^3.4|^4.0|^5.0|^6.0|^7.0",
         "friends-of-behat/mink-extension": "^2.3.0"
     },
     "require-dev": {
@@ -38,12 +38,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Robertfausk\\Behat\\PantherExtension\\": "src/"
+            "Robertfausk\\Behat\\PantherExtension\\": "../../src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "../../tests/"
         }
     },
     "config": {
@@ -51,38 +51,12 @@
         "allow-plugins": {
             "g1a/composer-test-scenarios": true,
             "pyrech/composer-changelogs": true
-        }
+        },
+        "vendor-dir": "../../vendor"
     },
     "extra": {
         "branch-alias": {
             "dev-main": "1.1.x-dev"
-        },
-        "scenarios": {
-            "symfony7": {
-                "require": {
-                    "symfony/config": "^7.0"
-                }
-            },
-            "symfony6": {
-                "require": {
-                    "symfony/config": "^6.0"
-                }
-            },
-            "symfony5": {
-                "require": {
-                    "symfony/config": "^5.0"
-                }
-            },
-            "symfony4": {
-                "require": {
-                    "symfony/config": "^4.0"
-                }
-            },
-            "symfony3": {
-                "require": {
-                    "symfony/config": "^3.4"
-                }
-            }
         }
     }
 }

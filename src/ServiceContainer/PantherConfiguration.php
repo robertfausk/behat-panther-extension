@@ -15,7 +15,7 @@ class PantherConfiguration implements ConfigurationInterface
     /**
      * @inheritDoc
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('panther');
         if (\method_exists($treeBuilder, 'getRootNode')) {
