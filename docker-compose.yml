@@ -51,6 +51,15 @@ services:
     build:
       context: .
       args:
-        - PHP_VERSION=8.2-rc
+        - PHP_VERSION=8.2
+    volumes:
+      - .:/var/www/html
+
+  php8.3:
+    tty: true
+    build:
+      context: .
+      args:
+        - PHP_VERSION=8.3
     volumes:
       - .:/var/www/html
