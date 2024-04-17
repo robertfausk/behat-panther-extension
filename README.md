@@ -198,13 +198,48 @@ private function spin(\Closure $closure, ?int $tries = 25): ?NodeElement
 
 ## How to contribute?
 
-Start docker-compose with php version of your choice. At the moment the following php versions can be used with docker-compose: php7.2, php7.3, php7.4, php8.0, php8.1 and php8.2.
+Start docker-compose with php version of your choice. At the moment the following php versions can be used with docker-compose: `php7.2`, `php7.3`, `php7.4`, `php8.0`, `php8.1`, `php8.2` and `php8.3`.
+
+E.g. you can start a container like this:
 
     docker-compose up php8.2
 
-Run phpunit tests
+Upgrade scenario lock files:
+
+    docker-compose run php8.2 composer update
+
+Run phpunit tests:
 
     docker-compose run php8.2 vendor/bin/phpunit
+
+If you want to start up all containers at once and keep them running in background then run the following:
+```
+docker-compose up -d php7.2
+docker-compose up -d php7.3
+docker-compose up -d php7.4
+docker-compose up -d php8.0
+docker-compose up -d php8.1
+docker-compose up -d php8.2
+docker-compose up -d php8.3
+```
+
+If you want to execute tests for scenario `symfony6` and `php8.2` then run the following:
+```
+docker-compose run php8.2 composer scenario symfony6
+docker-compose run php8.2 vendor/bin/bdi detect drivers
+docker-compose run php8.2 vendor/bin/behat --config=tests/Behat/behat.yml
+docker-compose run php8.2 vendor/bin/phpunit
+```
+
+Or if you want to execute tests for scenario `symfony7` and `php8.3` then run the following:
+```
+docker-compose run php8.3 composer scenario symfony7
+docker-compose run php8.3 vendor/bin/bdi detect drivers
+docker-compose run php8.3 vendor/bin/behat --config=tests/Behat/behat.yml
+docker-compose run php8.3 vendor/bin/phpunit
+```
+
+See also https://github.com/g1a/composer-test-scenarios for more information about scenarios.
 
 ## Credits
 

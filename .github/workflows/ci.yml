@@ -15,15 +15,19 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        php: [ '7.2', '7.3', '7.4', '8.0', '8.1', '8.2' ]
+        php: [ '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3' ]
         symfony: ['symfony3', 'symfony4', 'symfony5']
         include:
-          - php: '8.0'
-            symfony: 'symfony6'
           - php: '8.1'
             symfony: 'symfony6'
           - php: '8.2'
             symfony: 'symfony6'
+          - php: '8.3'
+            symfony: 'symfony6'
+          - php: '8.2'
+            symfony: 'symfony7'
+          - php: '8.3'
+            symfony: 'symfony7'
       fail-fast: false
     env:
       MATRIX_PHP: ${{ matrix.php }}

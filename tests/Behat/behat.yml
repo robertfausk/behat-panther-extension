@@ -6,10 +6,11 @@ default:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
     extensions:
-        Robertfausk\Behat\PantherExtension: ~ # no configuration here
+        Robertfausk\Behat\PantherExtension: ~
         Behat\MinkExtension:
             browser_name:       chrome
             javascript_session: javascript_chrome
+            base_url: "" # needed cause of php8.2 with error "rtrim(): Passing null to parameter #1 ($string) of type string is deprecated in /var/www/html/vendor/friends-of-behat/mink-extension/src/Behat/MinkExtension/Context/RawMinkContext.php line 144"
             sessions:
                 default:
                     panther:
