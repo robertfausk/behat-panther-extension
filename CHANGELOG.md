@@ -1,11 +1,20 @@
-vx.x.x / 2022-xx-xx
+vx.x.x / 2024-xx-xx
 ===================
+
+v1.1.2 / 2024-04-18
+===================
+
+Features:
+* Add support for ```Symfony 7``` #14
+
+  Thanks to @ConstantBqt
+* Add support for ```PHP 8.3``` #15
 
 v1.1.1 / 2022-09-17
 ===================
 
 Features:
-* Add support for ```PHP 8.2```
+* Add support for ```PHP 8.2``` #12
 
 Fixes:
 * Allow to pass variables/arrays to ```options``` in config #11
