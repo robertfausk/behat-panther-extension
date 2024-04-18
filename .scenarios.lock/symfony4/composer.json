@@ -30,7 +30,6 @@
         "friends-of-behat/mink-extension": "^2.3.0"
     },
     "require-dev": {
-        "dbrekelmans/bdi": "^1.0",
         "g1a/composer-test-scenarios": "^3.0",
         "matthiasnoback/symfony-config-test": "^4.1|^5.1",
         "phpunit/phpunit": "~7.5|~9.3",

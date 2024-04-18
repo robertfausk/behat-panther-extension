@@ -50,8 +50,7 @@ jobs:
         run: |
           .scenarios.lock/install "${{ matrix.symfony }}" "${DEPENDENCIES}"
       - name: Add browser drivers
-        run: |
-          vendor/bin/bdi detect drivers
+        uses: nanasess/setup-chromedriver@v2
       - name: Run unit tests
         run: |
           vendor/bin/phpunit -v
