@@ -1,6 +1,14 @@
 vx.x.x / 2024-xx-xx
 ===================
 
+v1.1.3 / 2024-05-07
+===================
+
+Fixes:
+* Ensure support for ```php-webdriver/webdriver >= 1.15.0``` #16
+
+  Thanks for report and investigation to @validaide-mark-bijl
+
 v1.1.2 / 2024-04-18
 ===================
 
