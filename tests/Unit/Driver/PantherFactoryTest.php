@@ -87,7 +87,7 @@ class PantherFactoryTest extends TestCase
                         ],
                         'args' => ['start-maximized'],
                         'binary' => ['/path/to/acme'],
-                        'extensions' => ['/var/www/html/tests/fixtures/extension_dummy.ext'],
+                        'extensions' => ['tests/fixtures/extension_dummy.ext'],
                     ],
                 ],
             ],
@@ -111,7 +111,7 @@ class PantherFactoryTest extends TestCase
             // base64 encoded value of extension file content
             $this->assertSame(['MTIzNDU2Nzg5MA=='], $chromeOptions['extensions']);
         } else {
-            $this->assertSame(['/var/www/html/tests/fixtures/extension_dummy.ext'], $chromeOptions['extensions']);
+            $this->assertSame(['tests/fixtures/extension_dummy.ext'], $chromeOptions['extensions']);
         }
 
         $this->assertSame(['download.default_directory' => '/var/www/html/tests/files/Downloads'], $chromeOptions['prefs']);
