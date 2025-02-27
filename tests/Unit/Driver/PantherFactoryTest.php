@@ -4,8 +4,10 @@ declare(strict_types=1);
 namespace Tests\Unit\Driver;
 
 use Facebook\WebDriver\Chrome\ChromeOptions;
+use Facebook\WebDriver\Remote\DesiredCapabilities;
 use PHPUnit\Framework\TestCase;
 use Robertfausk\Behat\PantherExtension\ServiceContainer\Driver\PantherFactory;
+use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * @author Robert Freigang <robertfreigang@gmx.de>
@@ -102,8 +104,10 @@ class PantherFactoryTest extends TestCase
         $this->assertArrayHasKey('request_timeout_in_ms', $arguments[2]);
         $this->assertSame('120000', $arguments[2]['request_timeout_in_ms']);
         $this->assertArrayHasKey('capabilities', $arguments[2]);
-        $this->assertArrayHasKey('goog:chromeOptions', $arguments[2]['capabilities']);
-        $chromeOptions = $arguments[2]['capabilities']['goog:chromeOptions'];
+        $this->assertInstanceOf(Definition::class, $arguments[2]['capabilities']);
+        $this->assertSame(DesiredCapabilities::class, $arguments[2]['capabilities']->getClass());
+        $this->assertArrayHasKey('goog:chromeOptions', $arguments[2]['capabilities']->getArgument(0));
+        $chromeOptions = $arguments[2]['capabilities']->getArgument(0)['goog:chromeOptions'];
 
         if ('goog:chromeOptions' === ChromeOptions::CAPABILITY) {
             $this->assertInstanceOf(ChromeOptions::class, $chromeOptions);
@@ -117,5 +121,28 @@ class PantherFactoryTest extends TestCase
         $this->assertSame(['download.default_directory' => '/var/www/html/tests/files/Downloads'], $chromeOptions['prefs']);
         $this->assertSame(['start-maximized'], $chromeOptions['args']);
         $this->assertSame(['/path/to/acme'], $chromeOptions['binary']);
+    }
+
+    public function test_build_selenium_driver_with_manager_options_capabilities_as_object_instead_of_array(): void
+    {
+        $config = [
+            'manager_options' => [
+                'capabilities' => [
+                    'browserName' => 'firefox',
+                    'platform' => 'ANY',
+                ],
+            ],
+        ];
+        $pantherFactory = new PantherFactory();
+        $definition = $pantherFactory->buildDriver($config);
+        $arguments = $definition->getArguments();
+
+        $this->assertArrayHasKey(2, $arguments, 'Arguments of definition should not be empty.');
+
+        $this->assertArrayHasKey('capabilities', $arguments[2]);
+        $this->assertInstanceOf(Definition::class, $arguments[2]['capabilities']);
+        $this->assertSame(DesiredCapabilities::class, $arguments[2]['capabilities']->getClass());
+        $this->assertArrayHasKey('browserName', $arguments[2]['capabilities']->getArgument(0));
+        $this->assertArrayHasKey('platform', $arguments[2]['capabilities']->getArgument(0));
     }
 }
