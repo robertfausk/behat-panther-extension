@@ -198,7 +198,7 @@ private function spin(\Closure $closure, ?int $tries = 25): ?NodeElement
 
 ## How to contribute?
 
-Start docker-compose with php version of your choice. At the moment the following php versions can be used with docker-compose: `php7.2`, `php7.3`, `php7.4`, `php8.0`, `php8.1`, `php8.2` and `php8.3`.
+Start docker-compose with php version of your choice. At the moment the following php versions can be used with docker-compose: `php7.2`, `php7.3`, `php7.4`, `php8.0`, `php8.1`, `php8.2`, `php8.3` and `php8.4`.
 
 E.g. you can start a container like this:
 
@@ -231,12 +231,12 @@ docker-compose run php8.2 vendor/bin/behat --config=tests/Behat/behat.yml
 docker-compose run php8.2 vendor/bin/phpunit
 ```
 
-Or if you want to execute tests for scenario `symfony7` and `php8.3` then run the following:
+Or if you want to execute tests for scenario `symfony7` and `php8.4` then run the following:
 ```
-docker-compose run php8.3 composer scenario symfony7
-docker-compose run php8.3 vendor/bin/bdi detect drivers
-docker-compose run php8.3 vendor/bin/behat --config=tests/Behat/behat.yml
-docker-compose run php8.3 vendor/bin/phpunit
+docker-compose run php8.4 composer scenario symfony7
+docker-compose run php8.4 vendor/bin/bdi detect drivers
+docker-compose run php8.4 vendor/bin/behat --config=tests/Behat/behat.yml
+docker-compose run php8.4 vendor/bin/phpunit
 ```
 
 See also https://github.com/g1a/composer-test-scenarios for more information about scenarios.
