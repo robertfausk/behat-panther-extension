@@ -13,7 +13,7 @@
 [![Open Issues](https://img.shields.io/github/issues-raw/robertfausk/behat-panther-extension?style=flat)](https://github.com/robertfausk/behat-panther-extension/issues)
 [![Closed Issues](https://img.shields.io/github/issues-closed-raw/robertfausk/behat-panther-extension?style=flat)](https://github.com/robertfausk/behat-panther-extension/issues?q=is%3Aissue+is%3Aclosed)
 [![Contributors](https://img.shields.io/github/contributors/robertfausk/behat-panther-extension?style=flat)](https://github.com/robertfausk/behat-panther-extension/graphs/contributors)
-![Contributors](https://img.shields.io/maintenance/yes/2024?style=flat)
+![Contributors](https://img.shields.io/maintenance/yes/2027?style=flat)
 [![Dependents](http://poser.pugx.org/robertfausk/behat-panther-extension/dependents)](https://packagist.org/packages/robertfausk/behat-panther-extension/dependents)
 
 Symfony Panther extension for Behat
@@ -214,13 +214,7 @@ Run phpunit tests:
 
 If you want to start up all containers at once and keep them running in background then run the following:
 ```
-docker-compose up -d php7.2
-docker-compose up -d php7.3
-docker-compose up -d php7.4
-docker-compose up -d php8.0
-docker-compose up -d php8.1
-docker-compose up -d php8.2
-docker-compose up -d php8.3
+docker-compose up -d
 ```
 
 If you want to execute tests for scenario `symfony6` and `php8.2` then run the following:

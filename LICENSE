@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2019-2024 Robert Freigang
+Copyright (c) 2019-2025 Robert Freigang
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,32 +24,32 @@ DEPENDENCY LICENSES:
 
 Name                               Version Licenses
 behat/behat                        v3.7.0  MIT
-behat/gherkin                      v4.9.0  MIT
-behat/mink                         v1.11.0 MIT
+behat/gherkin                      v4.12.0 MIT
+behat/mink                         v1.12.0 MIT
 behat/transliterator               v1.5.0  Artistic-1.0
 friends-of-behat/mink-extension    v2.5.0  MIT
-php-webdriver/webdriver            1.15.1  MIT
+php-webdriver/webdriver            1.15.2  MIT
 psr/container                      1.1.2   MIT
 psr/log                            2.0.0   MIT
-robertfausk/mink-panther-driver    v1.1.1  MIT
-symfony/browser-kit                v5.4.39 MIT
+robertfausk/mink-panther-driver    v1.1.2  MIT
+symfony/browser-kit                v5.4.45 MIT
 symfony/config                     v3.4.47 MIT
 symfony/console                    v4.4.49 MIT
-symfony/css-selector               v7.0.7  MIT
+symfony/css-selector               v7.2.0  MIT
 symfony/dependency-injection       v3.4.47 MIT
-symfony/deprecation-contracts      v2.5.3  MIT
-symfony/dom-crawler                v5.4.39 MIT
+symfony/deprecation-contracts      v2.5.4  MIT
+symfony/dom-crawler                v5.4.48 MIT
 symfony/event-dispatcher           v4.4.44 MIT
 symfony/event-dispatcher-contracts v1.10.0 MIT
 symfony/filesystem                 v4.4.42 MIT
-symfony/http-client                v5.4.39 MIT
-symfony/http-client-contracts      v2.5.3  MIT
+symfony/http-client                v5.4.49 MIT
+symfony/http-client-contracts      v2.5.5  MIT
 symfony/panther                    v1.1.1  MIT
-symfony/polyfill-ctype             v1.29.0 MIT
-symfony/polyfill-mbstring          v1.29.0 MIT
-symfony/polyfill-php80             v1.29.0 MIT
-symfony/process                    v5.4.39 MIT
-symfony/service-contracts          v2.5.3  MIT
+symfony/polyfill-ctype             v1.31.0 MIT
+symfony/polyfill-mbstring          v1.31.0 MIT
+symfony/polyfill-php72             v1.31.0 MIT
+symfony/process                    v5.4.47 MIT
+symfony/service-contracts          v2.5.4  MIT
 symfony/translation                v4.4.47 MIT
-symfony/translation-contracts      v2.5.3  MIT
+symfony/translation-contracts      v2.5.4  MIT
 symfony/yaml                       v5.3.14 MIT
