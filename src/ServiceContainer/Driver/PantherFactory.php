@@ -9,13 +9,14 @@ use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Robertfausk\Behat\PantherExtension\ServiceContainer\PantherConfiguration;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\Panther\PantherTestCase;
 
 /**
  * @author Robert Freigang <robertfreigang@gmx.de>
  */
 class PantherFactory implements DriverFactory
 {
+    private const BROWSER_SELENIUM = 'selenium';
+
     /**
      * {@inheritdoc}
      */
@@ -77,7 +78,7 @@ class PantherFactory implements DriverFactory
             $config['manager_options']['capabilities'][ChromeOptions::CAPABILITY] = $chromeOptions;
         }
 
-        if (isset($config['options']['browser']) && isset($config['manager_options']['capabilities']) && PantherTestCase::SELENIUM === $config['options']['browser']) {
+        if ($this->isSeleniumWithManagerOptionsCapabilities($config)) {
             $config['manager_options']['capabilities'] = new Definition(DesiredCapabilities::class, [$config['manager_options']['capabilities']]);
         }
 
@@ -89,5 +90,11 @@ class PantherFactory implements DriverFactory
                 $config['manager_options'] ?? [],
             )
         );
+    }
+
+    private function isSeleniumWithManagerOptionsCapabilities(array $config): bool
+    {
+        // we can not rely safely on PantherTestCase::SELENIUM which is introduced in symfony/panther 2.2.0
+        return isset($config['options']['browser']) && isset($config['manager_options']['capabilities']) && self::BROWSER_SELENIUM === $config['options']['browser'];
     }
 }
