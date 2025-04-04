@@ -1,7 +1,7 @@
 vx.x.x / 2025-xx-xx
 ===================
 
-v1.1.4 / 2025-04-04
+v1.2.0 / 2025-04-04
 ===================
 
 Features:
@@ -9,6 +9,7 @@ Features:
 
 Fixes:
 * Create `\Facebook\WebDriver\Remote\DesiredCapabilities` from `manager_options.capabilities`, if provided #17
+
   Thanks for report and investigation to @dkarlovi and @tucksaun
 
 v1.1.3 / 2024-05-07
