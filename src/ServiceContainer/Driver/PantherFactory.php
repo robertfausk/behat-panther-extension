@@ -5,9 +5,11 @@ namespace Robertfausk\Behat\PantherExtension\ServiceContainer\Driver;
 
 use Behat\MinkExtension\ServiceContainer\Driver\DriverFactory;
 use Facebook\WebDriver\Chrome\ChromeOptions;
+use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Robertfausk\Behat\PantherExtension\ServiceContainer\PantherConfiguration;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\Panther\PantherTestCase;
 
 /**
  * @author Robert Freigang <robertfreigang@gmx.de>
@@ -73,6 +75,10 @@ class PantherFactory implements DriverFactory
                 }
             }
             $config['manager_options']['capabilities'][ChromeOptions::CAPABILITY] = $chromeOptions;
+        }
+
+        if (isset($config['options']['browser']) && isset($config['manager_options']['capabilities']) && PantherTestCase::SELENIUM === $config['options']['browser']) {
+            $config['manager_options']['capabilities'] = new Definition(DesiredCapabilities::class, [$config['manager_options']['capabilities']]);
         }
 
         return new Definition(
