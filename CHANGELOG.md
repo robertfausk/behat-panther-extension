@@ -1,5 +1,15 @@
-vx.x.x / 2024-xx-xx
+vx.x.x / 2025-xx-xx
 ===================
+
+v1.1.4 / 2025-04-04
+===================
+
+Features:
+* Add support for ```PHP 8.4``` #19
+
+Fixes:
+* Create `\Facebook\WebDriver\Remote\DesiredCapabilities` from `manager_options.capabilities`, if provided #17
+  Thanks for report and investigation to @dkarlovi and @tucksaun
 
 v1.1.3 / 2024-05-07
 ===================
