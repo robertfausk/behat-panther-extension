@@ -17,7 +17,11 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /home/docker/.composer
 # contains dev-mode packages
 RUN composer global config --no-plugins allow-plugins.pyrech/composer-changelogs true
-RUN composer global require "pyrech/composer-changelogs:^1.7" --prefer-dist --no-progress --no-suggest --classmap-authoritative
+RUN if php -r 'exit(version_compare(PHP_VERSION, "8.0", ">=") ? 0 : 1);'; then \
+      composer global require "pyrech/composer-changelogs:^2" --prefer-dist --no-progress --classmap-authoritative; \
+    else \
+      composer global require "pyrech/composer-changelogs:^1" --prefer-dist --no-progress --classmap-authoritative; \
+    fi
 
 ##############################################################
 # add symfony/panther
