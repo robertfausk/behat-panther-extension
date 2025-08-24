@@ -13,8 +13,8 @@ RUN apt-get update && apt-get install -y \
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
-ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV COMPOSER_HOME /home/docker/.composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV COMPOSER_HOME=/home/docker/.composer
 # contains dev-mode packages
 RUN composer global config --no-plugins allow-plugins.pyrech/composer-changelogs true
 RUN if php -r 'exit(version_compare(PHP_VERSION, "8.0", ">=") ? 0 : 1);'; then \
@@ -27,7 +27,7 @@ RUN if php -r 'exit(version_compare(PHP_VERSION, "8.0", ">=") ? 0 : 1);'; then \
 # add symfony/panther
 ##############################################################
 RUN apt-get update && apt-get install -y libzip-dev zlib1g-dev unzip chromium && docker-php-ext-install zip
-ENV PANTHER_NO_SANDBOX 1
+ENV PANTHER_NO_SANDBOX=1
 
 ##############################################################
 # add gd
