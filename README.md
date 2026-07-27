@@ -198,7 +198,7 @@ private function spin(\Closure $closure, ?int $tries = 25): ?NodeElement
 
 ## How to contribute?
 
-Start docker-compose with php version of your choice. At the moment the following php versions can be used with docker-compose: `php7.2`, `php7.3`, `php7.4`, `php8.0`, `php8.1`, `php8.2`, `php8.3` and `php8.4`.
+Start docker-compose with php version of your choice. At the moment the following php versions can be used with docker-compose: `php8.2`, `php8.3` and `php8.4`.
 
 E.g. you can start a container like this:
 

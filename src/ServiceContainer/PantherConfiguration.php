@@ -18,11 +18,7 @@ class PantherConfiguration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('panther');
-        if (\method_exists($treeBuilder, 'getRootNode')) {
-            $root = $treeBuilder->getRootNode();
-        } else {
-            $root = $treeBuilder->root('panther');
-        }
+        $root = \method_exists($treeBuilder, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root('panther');
 
         $root->children()
             ->append($this->addOptionsNode())
@@ -36,45 +32,29 @@ class PantherConfiguration implements ConfigurationInterface
     public function addOptionsNode(): ArrayNodeDefinition
     {
         $treeBuilder = new TreeBuilder('options');
+        $root = \method_exists($treeBuilder, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root('options');
 
-        if (\method_exists($treeBuilder, 'getRootNode')) {
-            $root = $treeBuilder->getRootNode();
-        } else {
-            $root = $treeBuilder->root('options');
-        }
-
-        $node = $root
+        return $root
             ->info(
                 "These are the options passed as first argument to PantherTestCaseTrait::createPantherClient client constructor."
             )
             ->ignoreExtraKeys()
             ->variablePrototype()
-            ->end()
-        ;
-
-        return $node;
+            ->end();
     }
 
     public function addKernelOptionsNode(): ArrayNodeDefinition
     {
         $treeBuilder = new TreeBuilder('kernel_options');
+        $root = \method_exists($treeBuilder, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root('kernel_options');
 
-        if (\method_exists($treeBuilder, 'getRootNode')) {
-            $root = $treeBuilder->getRootNode();
-        } else {
-            $root = $treeBuilder->root('kernel_options');
-        }
-
-        $node = $root
+        return $root
             ->info(
                 "These are the options passed as second argument to PantherTestCaseTrait::createPantherClient client constructor."
             )
             ->ignoreExtraKeys()
             ->scalarPrototype()
-            ->end()
-        ;
-
-        return $node;
+            ->end();
     }
 
     public function addManagerOptionsNode(): ArrayNodeDefinition
@@ -87,15 +67,12 @@ class PantherConfiguration implements ConfigurationInterface
             $root = $treeBuilder->root('manager_options');
         }
 
-        $node = $root
+        return $root
             ->info(
                 "These are the options passed as third argument to PantherTestCaseTrait::createPantherClient client constructor."
             )
             ->ignoreExtraKeys()
             ->variablePrototype()
-            ->end()
-        ;
-
-        return $node;
+            ->end();
     }
 }
