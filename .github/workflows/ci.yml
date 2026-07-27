@@ -9,31 +9,37 @@ defaults:
     shell: bash
 
 jobs:
-
   tests:
-    name: Tests
-    runs-on: ubuntu-20.04
+    name: PHP ${{ matrix.php }} / ${{ matrix.symfony }}
+    runs-on: ubuntu-24.04
+
     strategy:
+      fail-fast: false
       matrix:
-        php: [ '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5' ]
-        symfony: ['symfony3', 'symfony4', 'symfony5']
+
+        php:
+          - "8.2"
+          - "8.3"
+          - "8.4"
+          - "8.5"
+
+        symfony:
+          - symfony5
+
         include:
-          - php: '8.1'
-            symfony: 'symfony6'
-          - php: '8.2'
-            symfony: 'symfony6'
-          - php: '8.3'
-            symfony: 'symfony6'
-          - php: '8.2'
-            symfony: 'symfony7'
-          - php: '8.3'
-            symfony: 'symfony7'
-          - php: '8.4'
-            symfony: 'symfony7'
+          - php: "8.2"
+            symfony: symfony6
+          - php: "8.3"
+            symfony: symfony6
+          - php: "8.2"
+            symfony: symfony7
+          - php: "8.3"
+            symfony: symfony7
+          - php: "8.4"
+            symfony: symfony7
           - php: '8.5'
             symfony: 'symfony7'
 
-      fail-fast: false
     env:
       MATRIX_PHP: ${{ matrix.php }}
       MATRIX_SYMFONY: ${{ matrix.symfony }}
@@ -45,27 +51,33 @@ jobs:
           fetch-depth: 1
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
-        env:
-          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          coverage: "none"
-          php-version: "${{ matrix.php }}"
-          tools: composer
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer:v2
+
       - name: Install scenario
         run: |
           .scenarios.lock/install "${{ matrix.symfony }}" "${DEPENDENCIES}"
-      - name: Add browser drivers
+
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Show Chrome version
+        run: chrome --version
+
+      - name: Setup Chromedriver
         uses: nanasess/setup-chromedriver@v2
+
       - name: Run unit tests
-        run: |
-          vendor/bin/phpunit -v
-      - name: Run behat tests
-        run: |
-          vendor/bin/behat --config=tests/Behat/behat.yml
-      - name: Archive logs artifacts
-        if: ${{ failure() }}
+        run: vendor/bin/phpunit
+
+      - name: Run Behat tests
+        run: vendor/bin/behat --config=tests/Behat/behat.yml
+
+      - name: Upload logs
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: logs_php-${{ matrix.php }}
-          path: |
-            logs
+          name: logs-php-${{ matrix.php }}-${{ matrix.symfony }}
+          path: logs
