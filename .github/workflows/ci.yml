@@ -29,7 +29,7 @@ jobs:
         include:
           - php: "8.2"
             symfony: symfony6
-          - php: "8.3"
+          - php: "8.5"
             symfony: symfony6
           - php: "8.2"
             symfony: symfony7
@@ -38,7 +38,11 @@ jobs:
           - php: "8.4"
             symfony: symfony7
           - php: '8.5'
-            symfony: 'symfony7'
+            symfony: symfony7
+          - php: '8.4'
+            symfony: symfony8
+          - php: '8.5'
+            symfony: symfony8
 
     env:
       MATRIX_PHP: ${{ matrix.php }}
