@@ -25,9 +25,9 @@
     "require": {
         "symfony/config": "^7.0",
         "php": ">=8.2",
-        "behat/behat": "^3.0.5",
+        "behat/behat": "^3.0.5||^4.0@alpha",
         "robertfausk/mink-panther-driver": "^1.0",
-        "friends-of-behat/mink-extension": "^2.3.0"
+        "friends-of-behat/mink-extension": "^2.3.0||v3.0.0-ALPHA.1"
     },
     "require-dev": {
         "dbrekelmans/bdi": "1.0",

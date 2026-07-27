@@ -20,7 +20,7 @@ class PantherFactory implements DriverFactory
     /**
      * {@inheritdoc}
      */
-    public function getDriverName()
+    public function getDriverName(): string
     {
         return 'panther';
     }
@@ -28,7 +28,7 @@ class PantherFactory implements DriverFactory
     /**
      * {@inheritdoc}
      */
-    public function supportsJavascript()
+    public function supportsJavascript(): bool
     {
         return true;
     }
@@ -36,7 +36,7 @@ class PantherFactory implements DriverFactory
     /**
      * {@inheritdoc}
      */
-    public function configure(ArrayNodeDefinition $builder)
+    public function configure(ArrayNodeDefinition $builder): void
     {
         $configuration = new PantherConfiguration();
         $builder->append($configuration->addOptionsNode());
@@ -47,7 +47,7 @@ class PantherFactory implements DriverFactory
     /**
      * {@inheritdoc}
      */
-    public function buildDriver(array $config)
+    public function buildDriver(array $config): Definition
     {
         if (!class_exists('Behat\Mink\Driver\PantherDriver')) {
             throw new \RuntimeException(
