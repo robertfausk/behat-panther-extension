@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests\Unit;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Robertfausk\Behat\PantherExtension\ServiceContainer\PantherConfiguration;
 
@@ -14,14 +15,14 @@ class PantherConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    public function validConfigurationProvider(): array
+    public static function validConfigurationProvider(): array
     {
         return [
             'empty options' => [['options' => []]],
         ];
     }
 
-    public function invalidConfigurationProvider(): array
+    public static function invalidConfigurationProvider(): array
     {
         return [
             'misspelled options' => [['opions' => []], 'Unrecognized option "opions"'],
@@ -29,11 +30,10 @@ class PantherConfigurationTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidConfigurationProvider
-     *
      * @param array  $configurationOptions
      * @param string $message
      */
+    #[DataProvider('invalidConfigurationProvider')]
     public function test_invalid_configuration(array $configurationOptions, string $message): void
     {
         $this->assertConfigurationIsInvalid(
@@ -45,10 +45,9 @@ class PantherConfigurationTest extends TestCase
     }
 
     /**
-     * @dataProvider validConfigurationProvider
-     *
      * @param array $configurationOptions
      */
+    #[DataProvider('validConfigurationProvider')]
     public function test_valid_configuration(array $configurationOptions): void
     {
         $this->assertConfigurationIsValid(
