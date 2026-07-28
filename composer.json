@@ -61,21 +61,41 @@
             "symfony8": {
                 "require": {
                     "symfony/config": "^8.0"
+                },
+                "config": {
+                    "platform": {
+                        "php": "8.4.0"
+                    }
                 }
             },
             "symfony7": {
                 "require": {
                     "symfony/config": "^7.0"
+                },
+                "config": {
+                    "platform": {
+                        "php": "8.2.0"
+                    }
                 }
             },
             "symfony6": {
                 "require": {
                     "symfony/config": "^6.0"
+                },
+                "config": {
+                    "platform": {
+                        "php": "8.2.0"
+                    }
                 }
             },
             "symfony5": {
                 "require": {
                     "symfony/config": "^5.0"
+                },
+                "config": {
+                    "platform": {
+                        "php": "8.2.0"
+                    }
                 }
             }
         }

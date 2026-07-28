@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/robertfausk/behat-panther-extension/v/stable.svg)](https://packagist.org/packages/robertfausk/behat-panther-extension)
 [![Latest Unstable Version](https://poser.pugx.org/robertfausk/behat-panther-extension/v/unstable.svg)](https://packagist.org/packages/robertfausk/behat-panther-extension)
 [![Total Downloads](https://poser.pugx.org/robertfausk/behat-panther-extension/downloads.svg)](https://packagist.org/packages/robertfausk/behat-panther-extension)
-[![Monhtly Downloads](https://img.shields.io/packagist/dm/robertfausk/behat-panther-extension?style=flat&color=blue)](https://img.shields.io/packagist/dm/robertfausk/behat-panther-extension)
+[![Monthly Downloads](https://img.shields.io/packagist/dm/robertfausk/behat-panther-extension?style=flat&color=blue)](https://img.shields.io/packagist/dm/robertfausk/behat-panther-extension)
 [![Daily Downloads](https://img.shields.io/packagist/dd/robertfausk/behat-panther-extension?style=flat&color=blue)](https://img.shields.io/packagist/dm/robertfausk/behat-panther-extension)
 [![Tests](https://github.com/robertfausk/behat-panther-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/robertfausk/behat-panther-extension/actions/workflows/ci.yml)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/robertfausk/behat-panther-extension/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/robertfausk/behat-panther-extension/)
@@ -18,6 +18,13 @@
 
 Symfony Panther extension for Behat
 
+| PHP | Symfony 5 | Symfony 6 | Symfony 7 | Symfony 8 |
+|-----|-----------|-----------|-----------|-----------|
+| 8.2 | ✅ | ✅ | ✅ | ❌ |
+| 8.3 | ✅ | ✅ | ✅ | ❌ |
+| 8.4 | ✅ | ✅ | ✅ | ✅ |
+| 8.5 | ✅ | ✅ | ✅ | ✅ |
+
 ## Install
 
 ```BASH
@@ -26,7 +33,7 @@ composer require --dev robertfausk/behat-panther-extension
 
 ## Usage example
 
-* Add ```Robertfausk\Behat\PantherExtension: ~``` to your behat.yml.
+* Add ```Robertfausk\Behat\PantherExtension: ^1.0``` to your behat.yml.
 * Use ```panther``` session in ```Behat\MinkExtension```. 
 * The extension will use options of ```symfony/panther``` by default.
 Have a look at ```PantherTestCaseTrait::$defaultOptions``` for this.
@@ -34,7 +41,7 @@ Have a look at ```PantherTestCaseTrait::$defaultOptions``` for this.
     ```YAML
     # in behat.yml
         extensions:
-            Robertfausk\Behat\PantherExtension: ~ # no configuration here
+            Robertfausk\Behat\PantherExtension: ^1.0 # no configuration here
             Behat\MinkExtension:
                javascript_session: javascript_chrome
                sessions:
@@ -66,12 +73,12 @@ Have a look at ```PantherTestCaseTrait::$defaultOptions``` for this.
 
 #### Example on how to pass arguments to ChromeDriver binary
 
-See also https://chromedriver.chromium.org/logging
+See also https://google.github.io/chromedriver/logging
 
 ```YAML
 # in behat.yml enable logging
     extensions:
-        Robertfausk\Behat\PantherExtension: ~
+        Robertfausk\Behat\PantherExtension: ^1.0
         Behat\MinkExtension:
            javascript_session: javascript
            sessions:
@@ -88,7 +95,7 @@ See also https://chromedriver.chromium.org/logging
 ```YAML
 # in behat.yml ensure that chrome saves files to the destination you want
     extensions:
-        Robertfausk\Behat\PantherExtension: ~
+        Robertfausk\Behat\PantherExtension: ^1.0
         Behat\MinkExtension:
            javascript_session: javascript
            files_path: '%paths.base%/tests/files'
@@ -111,7 +118,7 @@ Feature: Acme files can be downloaded
     # additionally setup your database entries etc. if needed
 
   @javascript
-  Scenario: As an user with role Admin i can download an existing acme file
+  Scenario: As a user with role Admin I can download an existing acme file
     Given I am authenticated as "admin@acme.de"
     And I am on "/acme-file-list"
     Then I wait for "acme.pdf" to appear
@@ -194,19 +201,24 @@ private function spin(\Closure $closure, ?int $tries = 25): ?NodeElement
                                
 ### How to upgrade?
 
- Have a look at [CHANGELOG](CHANGELOG.md) for detailed information.
+See the [CHANGELOG](CHANGELOG.md) for a list of changes between versions.
 
-## How to contribute?
+## Development
 
-Start docker-compose with php version of your choice. At the moment the following php versions can be used with docker-compose: `php8.2`, `php8.3` and `php8.4`.
+Start docker-compose with php version of your choice. At the moment the following php versions can be used with docker-compose: `php8.2`, `php8.3`, `php8.4` and `php8.5`.
 
 E.g. you can start a container like this:
 
     docker-compose up php8.2
 
+To run tests locally you need:
+- Docker & Docker Compose
+- Chrome / Chromium
+- Chromedriver
+
 Upgrade scenario lock files:
 
-    docker-compose run php8.2 composer update
+    docker-compose run php8.5 composer update
 
 Run phpunit tests:
 
@@ -228,6 +240,14 @@ docker-compose run php8.2 vendor/bin/phpunit
 Or if you want to execute tests for scenario `symfony7` and `php8.4` then run the following:
 ```
 docker-compose run php8.4 composer scenario symfony7
+docker-compose run php8.4 vendor/bin/bdi detect drivers
+docker-compose run php8.4 vendor/bin/behat --config=tests/Behat/behat.yml
+docker-compose run php8.4 vendor/bin/phpunit
+```
+
+For symfony8, PHP 8.4+ is required:
+```
+docker-compose run php8.4 composer scenario symfony8
 docker-compose run php8.4 vendor/bin/bdi detect drivers
 docker-compose run php8.4 vendor/bin/behat --config=tests/Behat/behat.yml
 docker-compose run php8.4 vendor/bin/phpunit
