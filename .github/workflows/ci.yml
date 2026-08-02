@@ -74,8 +74,7 @@ jobs:
 
       - name: Run Behat tests
         run: |
-          BEHAT_VERSION=$(composer show behat/behat --field=version)
-          if [[ "$BEHAT_VERSION" == 4* ]]; then
+          if composer show behat/behat | grep -q "^versions.*4\."; then
             vendor/bin/behat --config=tests/Behat/behat.php
           else
             vendor/bin/behat --config=tests/Behat/behat.yml
