@@ -73,7 +73,12 @@ jobs:
         run: vendor/bin/phpunit
 
       - name: Run Behat tests
-        run: vendor/bin/behat --config=tests/Behat/behat.yml
+        run: |
+          if php -r "exit(class_exists('Behat\Config\Config') ? 0 : 1);" ; then
+            vendor/bin/behat --config=tests/Behat/behat.php
+          else
+            vendor/bin/behat --config=tests/Behat/behat.yml
+          fi
 
       - name: Upload logs
         if: failure()
