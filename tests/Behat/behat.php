@@ -17,7 +17,7 @@ return (new Config())
             )
         )
         ->withExtension(new Extension(PantherExtension::class))
-        ->withExtension(new Extension('Behat\MinkExtension', [
+        ->withExtension(new Extension('Behat\MinkExtension\ServiceContainer\MinkExtension', [
             'browser_name' => 'chrome',
             'javascript_session' => 'javascript_chrome',
             'base_url' => '',
