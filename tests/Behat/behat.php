@@ -6,7 +6,7 @@ use Behat\Config\Config;
 use Behat\Config\Extension;
 use Behat\Config\Profile;
 use Behat\Config\Suite;
-use Robertfausk\Behat\PantherExtension;
+use Robertfausk\Behat\PantherExtension\ServiceContainer\PantherExtension;
 
 return (new Config())
     ->withProfile((new Profile('default'))
