@@ -74,7 +74,7 @@ jobs:
 
       - name: Run Behat tests
         run: |
-          BEHAT_VERSION=$(composer show behat/behat --format=json | php -r "echo json_decode(stream_get_contents(STDIN))->version ?? '3';")
+          BEHAT_VERSION=$(composer show behat/behat --field=version)
           if [[ "$BEHAT_VERSION" == 4* ]]; then
             vendor/bin/behat --config=tests/Behat/behat.php
           else
