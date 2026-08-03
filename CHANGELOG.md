@@ -1,5 +1,34 @@
-vx.x.x / 2025-xx-xx
+vx.x.x / 2026-xx-xx
 ===================
+
+v2.0.0 / 2026-08-02
+===================
+
+Features:
+* Add support for ```Symfony 8``` #25
+
+  Thanks to @loics59
+* Add support for ```Behat 4.x``` with PHP config file #25
+
+    Thanks to @AGSadee even if PR is unmerged
+* Add support for ```PHP 8.5``` in CI #20 #23
+
+  Thanks to @shakaran
+
+Fixes:
+* Fix Docker warning for legacy key/value format #21
+
+  Thanks to @@shakaran
+
+Breaking Changes:
+* Drop support for ```PHP 7.2```, ```PHP 7.3```, ```PHP 7.4```, ```PHP 8.0```, ```PHP 8.1``` #27
+* Drop support for ```Symfony 3``` and ```Symfony 4``` #27
+
+Misc:
+* Simplify useless variable and If/else to ternary #24
+
+  Thanks to @@shakaran
+* Add platform constraints to composer scenarios and improve README #27
 
 v1.2.0 / 2025-04-04
 ===================
