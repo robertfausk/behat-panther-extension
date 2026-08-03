@@ -33,15 +33,18 @@ composer require --dev robertfausk/behat-panther-extension
 
 ## Usage example
 
-* Add ```Robertfausk\Behat\PantherExtension: ^1.0``` to your behat.yml.
 * Use ```panther``` session in ```Behat\MinkExtension```. 
 * The extension will use options of ```symfony/panther``` by default.
 Have a look at ```PantherTestCaseTrait::$defaultOptions``` for this.
+
+### Behat 3 – behat.yml
+
+* Add ```Robertfausk\Behat\PantherExtension: ~``` to your behat.yml.
 * Following are some examples with all sessions using mink-panther-driver:
     ```YAML
     # in behat.yml
         extensions:
-            Robertfausk\Behat\PantherExtension: ^1.0 # no configuration here
+            Robertfausk\Behat\PantherExtension: ~  # no configuration here
             Behat\MinkExtension:
                javascript_session: javascript_chrome
                sessions:
@@ -71,14 +74,14 @@ Have a look at ```PantherTestCaseTrait::$defaultOptions``` for this.
                                request_timeout_in_ms: 120000
     ```
 
-#### Example on how to pass arguments to ChromeDriver binary
+#### Example on how to pass arguments to ChromeDriver binary (behat.yml)
 
 See also https://google.github.io/chromedriver/logging
 
 ```YAML
 # in behat.yml enable logging
     extensions:
-        Robertfausk\Behat\PantherExtension: ^1.0
+        Robertfausk\Behat\PantherExtension: ~
         Behat\MinkExtension:
            javascript_session: javascript
            sessions:
@@ -90,12 +93,12 @@ See also https://google.github.io/chromedriver/logging
                                - --verbose
 ```
 
-#### Example on how to test for a downloaded file
+#### Example on how to test for a downloaded file (behat.yml)
 
 ```YAML
 # in behat.yml ensure that chrome saves files to the destination you want
     extensions:
-        Robertfausk\Behat\PantherExtension: ^1.0
+        Robertfausk\Behat\PantherExtension: ~
         Behat\MinkExtension:
            javascript_session: javascript
            files_path: '%paths.base%/tests/files'
@@ -107,6 +110,140 @@ See also https://google.github.io/chromedriver/logging
                                 goog:chromeOptions:
                                     prefs:
                                         download.default_directory: '/var/www/html/tests/files/Downloads'
+```
+
+---
+
+### Behat 4 – behat.php
+
+* Add ```Robertfausk\Behat\PantherExtension\ServiceContainer\PantherExtension``` to your behat.php.
+* Following are some examples with all sessions using mink-panther-driver:
+    ```PHP
+    <?php
+    // in behat.php
+    declare(strict_types=1);
+
+    use Behat\Config\Config;
+    use Behat\Config\Extension;
+    use Behat\Config\Profile;
+    use Behat\MinkExtension\ServiceContainer\MinkExtension;
+    use Robertfausk\Behat\PantherExtension\ServiceContainer\PantherExtension;
+
+    return (new Config())
+        ->withProfile((new Profile('default'))
+            ->withExtension(new Extension(PantherExtension::class)) // no configuration here
+            ->withExtension(new Extension(MinkExtension::class, [
+                'javascript_session' => 'javascript_chrome',
+                'sessions' => [
+                    'default' => [
+                        'panther' => [],
+                    ],
+                    'javascript' => [
+                        'panther' => ['options' => []],
+                    ],
+                    'javascript_chrome' => [
+                        'panther' => [
+                            'options' => [
+                                'browser' => 'chrome',
+                                'webServerDir' => '%paths.base%/public', // your custom public dir
+                            ],
+                        ],
+                    ],
+                    'javascript_firefox' => [
+                        'panther' => [
+                            'options' => ['browser' => 'firefox'],
+                        ],
+                    ],
+                    'javascript_with_all_options' => [
+                        'panther' => [
+                            'options' => [
+                                'env' => ['APP_ENV' => 'dev'],
+                                'hostname' => '127.0.0.1',
+                            ],
+                            'kernel_options' => [], // unused by behat-panther-extension cause it does not extend KernelTestCase
+                            'manager_options' => [
+                                'connection_timeout_in_ms' => 5000,
+                                'request_timeout_in_ms' => 120000,
+                            ],
+                        ],
+                    ],
+                ],
+            ]))
+        );
+    ```
+
+#### Example on how to pass arguments to ChromeDriver binary (behat.php)
+
+See also https://google.github.io/chromedriver/logging
+
+```PHP
+<?php
+// in behat.php enable logging
+declare(strict_types=1);
+
+use Behat\Config\Config;
+use Behat\Config\Extension;
+use Behat\Config\Profile;
+use Behat\MinkExtension\ServiceContainer\MinkExtension;
+use Robertfausk\Behat\PantherExtension\ServiceContainer\PantherExtension;
+
+return (new Config())
+    ->withProfile((new Profile('default'))
+        ->withExtension(new Extension(PantherExtension::class))
+        ->withExtension(new Extension(MinkExtension::class, [
+            'javascript_session' => 'javascript',
+            'sessions' => [
+                'javascript' => [
+                    'panther' => [
+                        'manager_options' => [
+                            'chromedriver_arguments' => [
+                                '--log-path=/var/www/html/chromedriver.log',
+                                '--verbose',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]))
+    );
+```
+
+#### Example on how to test for a downloaded file (behat.php)
+
+```PHP
+<?php
+// in behat.php ensure that chrome saves files to the destination you want
+declare(strict_types=1);
+
+use Behat\Config\Config;
+use Behat\Config\Extension;
+use Behat\Config\Profile;
+use Behat\MinkExtension\ServiceContainer\MinkExtension;
+use Robertfausk\Behat\PantherExtension\ServiceContainer\PantherExtension;
+
+return (new Config())
+    ->withProfile((new Profile('default'))
+        ->withExtension(new Extension(PantherExtension::class))
+        ->withExtension(new Extension(MinkExtension::class, [
+            'javascript_session' => 'javascript',
+            'files_path' => '%paths.base%/tests/files',
+            'sessions' => [
+                'javascript' => [
+                    'panther' => [
+                        'manager_options' => [
+                            'capabilities' => [
+                                'goog:chromeOptions' => [
+                                    'prefs' => [
+                                        'download.default_directory' => '/var/www/html/tests/files/Downloads',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]))
+    );
 ```
 
 ```GHERKIN
