@@ -1,0 +1,44 @@
+
+name: Update Composer Scenarios
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    name: Update scenario lock files
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.5"
+          coverage: none
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Update scenarios
+        run: composer scenario:update
+
+      - name: Commit updated scenarios
+        run: |
+          if git diff --quiet -- .scenarios.lock/; then
+            echo "No scenario changes."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add .scenarios.lock/
+          git commit -m "Update Composer scenario lock files"
+          git push
